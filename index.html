@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+{% autoescape true %}
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="//www.mi.t.u-tokyo.ac.jp/css/style.css" />
+    <link rel="stylesheet" type="text/css" href="/css/style.css" />
+  </head>
+  <body>
+    <div id="container">
+      <div id="content">
+        <h1>MIL-arXiv</h1>
+        <h3 class="english">{{ name }}</h3>
+        <form method="post" action="/">
+          {% for area, flg in account.areas.items()|sort  %}
+          <div class="area">
+            {% if flg %}
+            <input type="checkbox" name="{{ area }}" value="1" id="{{ area }}" checked="checked">
+            {% else %}
+            <input type="checkbox" name="{{ area }}" value="1" id="{{ area }}">
+            {% endif %}
+            <label for="{{ area }}">{{ area }}</label>
+          </div>
+          {% endfor %}
+          <div class="submit-area">
+            <input type="submit" value="submit"/>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div id="footer">
+      <a href="http://www.mi.t.u-tokyo.ac.jp" target="_blank">Machine Intelligence Laboratory</a>
+    </div>
+  </body>
+</html>
+{% endautoescape %}
