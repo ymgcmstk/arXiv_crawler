@@ -12,6 +12,14 @@ handlers:
 - url: /css
   static_dir: css
 
+- url: /crons/checker
+  script: checker.py
+  login: admin
+
+- url: /crons/sender
+  script: sender.py
+  login: admin
+
 - url: .*
   script: main.app
 
