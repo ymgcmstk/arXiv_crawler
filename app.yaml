@@ -13,15 +13,19 @@ handlers:
   static_dir: css
 
 - url: /crons/checker
-  script: checker.py
+  script: checker.app
   login: admin
 
 - url: /crons/sender
-  script: sender.py
+  script: sender.app
   login: admin
+
+- url: /logout/logout
+  script: logout.app
 
 - url: .*
   script: main.app
+
 
 libraries:
 - name: webapp2

@@ -32,7 +32,7 @@ class ExtendedJsonProperty(ndb.BlobProperty):
 
 class Account(ndb.Model):
     uid = ndb.StringProperty()
-    email = ndb.StringProperty()
+    email = ndb.TextProperty()
     areas = ExtendedJsonProperty()
 
 class BaseHandler(webapp2.RequestHandler):
@@ -44,8 +44,12 @@ class BaseHandler(webapp2.RequestHandler):
 class MainHandler(BaseHandler):
     def get(self):
         user = users.get_current_user()
-        if not user:
+        if user is None:
             self.redirect(users.create_login_url(self.request.uri))
+            return
+        if not '@mi.t.u-tokyo.ac.jp' in user.email():
+            self.response.write('Not Permitted.')
+            return
         q = ndb.gql("SELECT * FROM Account WHERE uid = :1", user.user_id())
         account = q.get()
         if not account:

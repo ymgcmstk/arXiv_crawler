@@ -5,7 +5,7 @@ from google.appengine.ext import ndb
 import urllib2
 from main import TARGLIST
 
-class CheckArXiv:
+class CheckArXiv(webapp2.RequestHandler):
     def get(self):
         for area in TARGLIST:
             self.main(area)
@@ -93,21 +93,24 @@ class CheckArXiv:
         end_paper.number = number
         end_paper.put()
     def main(self, area):
-        q = ndb.gql("SELECT * FROM EndPaper WHERE area = :1", area)
-        end_paper = q.get().number()
-        self.get_info(area, end_paper)
+        end_paper = ndb.gql("SELECT * FROM EndPaper WHERE area = :1", area).get()
+        if end_paper is not None:
+            end_paper_number = end_paper.number
+        else:
+            end_paper_number = None
+        self.get_info(area, end_paper_number)
 
 class Paper(ndb.Model):
     number = ndb.StringProperty()
-    title = ndb.StringProperty()
-    first_author = ndb.StringProperty()
-    authors = ndb.StringProperty()
-    abstract = ndb.StringProperty()
+    title = ndb.TextProperty()
+    first_author = ndb.TextProperty()
+    authors = ndb.TextProperty()
+    abstract = ndb.TextProperty()
     area = ndb.StringProperty()
-    updated_at = ndb.StringProperty()
+    updated_at = ndb.TextProperty()
 
 class EndPaper(ndb.Model):
-    number = ndb.StringProperty()
+    number = ndb.TextProperty()
     area = ndb.StringProperty()
 
 app = webapp2.WSGIApplication([('/crons/checker', CheckArXiv)])
