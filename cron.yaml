@@ -1,0 +1,8 @@
+cron:
+- description: Daily arXiv checker
+  url: /crons/checker
+  schedule: every 6 hours
+
+- description: E-mail sender
+  url: /crons/sender
+  schedule: every day 13:00
