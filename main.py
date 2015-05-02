@@ -48,7 +48,7 @@ class MainHandler(BaseHandler):
             self.redirect(users.create_login_url(self.request.uri))
             return
         if not '@mi.t.u-tokyo.ac.jp' in user.email():
-            self.response.write('Not Permitted.')
+            self.response.write('Permission Denied')
             return
         q = ndb.gql("SELECT * FROM Account WHERE uid = :1", user.user_id())
         account = q.get()
@@ -58,6 +58,9 @@ class MainHandler(BaseHandler):
             account.email = user.email()
             account.areas = make_targ(TARGLIST)
             account.put()
+        for i in make_targ(TARGLIST):
+            if not i in account.areas:
+                account.areas[i] = False
         for i in account.areas:
             flg = memcache.get(i)
             if flg is not None:
