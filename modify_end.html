@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+{% autoescape true %}
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="//www.mi.t.u-tokyo.ac.jp/css/style.css" />
+    <link rel="stylesheet" type="text/css" href="/css/style.css" />
+  </head>
+  <body>
+    <div id="container">
+      <div id="content">
+        <h1>MIL-arXiv(Modify EndPapers)</h1>
+        <form method="post" action="/utils/modify_end">
+          <input type="text" name="area">
+          <input type="text" name="number">
+          <div class="submit-area">
+            <input type="submit" value="submit"/>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div id="footer">
+      <a href="http://www.mi.t.u-tokyo.ac.jp" target="_blank">Machine Intelligence Laboratory</a>
+    </div>
+  </body>
+</html>
+{% endautoescape %}
