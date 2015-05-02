@@ -22,7 +22,7 @@ class SendEmail(webapp2.RequestHandler):
             paper.key.delete()
         self.response.write('success')
     def main(self, account, papers):
-        content = ''
+        content = u''
         written_number = []
         if len(papers) == 0:
             return
@@ -33,19 +33,13 @@ class SendEmail(webapp2.RequestHandler):
             if paper.number in written_number:
                 continue
             paper_count += 1
-            content += '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n'
+            content += u'━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n'
             content += paper.title
-            try:
-                content += ', ' + paper.first_author + '\n'
-            except:
-                content += '\n'
-            #content += paper.title + '\n'
-            content += '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n'
+
+            content += ', ' + paper.first_author + '\n'
+            content += u'━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n'
             content += paper.abstract + '\n\n'
-            try:
-                content += paper.authors
-            except:
-                content += 'Authors cannot be shown because of ascii.....'
+            content += paper.authors
             content = content[:-2] + '\n'
             content += 'http://arxiv.org/pdf/' + paper.number + '\n\n'
             written_number.append(paper.number)
