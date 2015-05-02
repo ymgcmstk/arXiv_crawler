@@ -9,6 +9,7 @@ class CheckArXiv(webapp2.RequestHandler):
     def get(self):
         for area in TARGLIST:
             self.main(area)
+        self.response.write('success')
     def gen_recent_url(self, area):
         return "http://arxiv.org/list/" + area + "/recent"
     def get_html(self, url):
