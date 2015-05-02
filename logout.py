@@ -12,5 +12,5 @@ class LogoutHandler(webapp2.RequestHandler):
             self.redirect(users.create_logout_url(self.request.uri))
 
 app = webapp2.WSGIApplication([
-    ('/api/logout', LogoutHandler),
+    ('/utils/logout', LogoutHandler),
 ], debug=True)

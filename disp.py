@@ -33,5 +33,5 @@ class DispHandler(webapp2.RequestHandler):
         self.response.write('---------------------------<br>')
 
 app = webapp2.WSGIApplication([
-    ('/api/disp', DispHandler),
+    ('/utils/disp', DispHandler),
 ], debug=True)
