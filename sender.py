@@ -51,7 +51,7 @@ class SendEmail(webapp2.RequestHandler):
             title = 'MIL-arXiv (%d papers)' % paper_count
         self.gmail(title, content, account.email)
     def gmail(self, title, content, address):
-        mail.send_mail(sender="yamaguchi@mi.t.u-tokyo.ac.jp",
+        mail.send_mail(sender="papers@mil-arxiv.appspotmail.com",
                        to=address,
                        subject=title,
                        body=content)
