@@ -20,12 +20,16 @@ handlers:
   script: sender.app
   login: admin
 
-- url: /api/logout
+- url: /utils/logout
   script: logout.app
   login: admin
 
-- url: /api/disp
+- url: /utils/disp
   script: disp.app
+  login: admin
+
+- url: /utils/modify_end
+  script: modify_end.app
   login: admin
 
 - url: .*
