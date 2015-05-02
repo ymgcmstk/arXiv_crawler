@@ -11,11 +11,6 @@ from main import BaseHandler
 
 class ModifyEndHandler(BaseHandler):
     def get(self):
-        self.horizontal_line('EndPapers')
-        q = ndb.gql("SELECT * FROM EndPaper")
-        for i in q.iter():
-            self.response.write(i)
-            self.response.write('<br>')
         self.render('modify_end.html')
     def post(self):
         self.horizontal_line('EndPapers')
