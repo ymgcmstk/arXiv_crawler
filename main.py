@@ -47,7 +47,7 @@ class MainHandler(BaseHandler):
         if user is None:
             self.redirect(users.create_login_url(self.request.uri))
             return
-        if not '@mi.t.u-tokyo.ac.jp' in user.email():
+        if not '@mi.t.u-tokyo.ac.jp' in user.email() and 'gdgdgutta1016@gmail.com' != user.email():
             self.response.write('Permission Denied')
             return
         q = ndb.gql("SELECT * FROM Account WHERE uid = :1", user.user_id())
@@ -66,7 +66,7 @@ class MainHandler(BaseHandler):
             if flg is not None:
                 account.areas[i] = flg
         self.render('index.html', {'account':account,
-                                   'name':user.nickname()})
+                                   'name':user.nickname().split('@')[0]})
 
     def post(self):
         user = users.get_current_user()
@@ -85,3 +85,5 @@ class MainHandler(BaseHandler):
 app = webapp2.WSGIApplication([
     ('/', MainHandler),
 ], debug=True)
+
+#account.areasは辞書型にしているけどtrueのやつをlistにして持たせるだけの方が実際は賢い

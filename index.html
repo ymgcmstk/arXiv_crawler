@@ -9,7 +9,8 @@
     <div id="container">
       <div id="content">
         <h1>MIL-arXiv</h1>
-        <h3 class="english">{{ name }}</h3>
+        <div class="hi-message">Hi, {{ name }}!</div>
+        <h3>Subscriptions:</h3>
         <form method="post" action="/">
           {% for area, flg in account.areas.items()|sort  %}
           <div class="area">
@@ -19,6 +20,7 @@
             <input type="checkbox" name="{{ area }}" value="1" id="{{ area }}">
             {% endif %}
             <label for="{{ area }}">{{ area }}</label>
+            <a href="http://arxiv.org/list/{{area}}/recent">(arXiv Link)</a>
           </div>
           {% endfor %}
           <div class="submit-area">

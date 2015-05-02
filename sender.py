@@ -17,11 +17,11 @@ class SendEmail(webapp2.RequestHandler):
         for i in q.iter():
             papers.append(i)
         for account in accounts:
-            self.main(account, papers)
+            self.gen_mail(account, papers)
         for paper in papers:
             paper.key.delete()
         self.response.write('success')
-    def main(self, account, papers):
+    def gen_mail(self, account, papers):
         content = u''
         written_number = []
         if len(papers) == 0:
@@ -29,6 +29,8 @@ class SendEmail(webapp2.RequestHandler):
         paper_count = 0
         for paper in papers:
             if not paper.area in account.areas:
+                continue
+            if not account.areas[paper.area]:
                 continue
             if paper.number in written_number:
                 continue
@@ -43,7 +45,9 @@ class SendEmail(webapp2.RequestHandler):
             content = content[:-2] + '\n'
             content += 'http://arxiv.org/pdf/' + paper.number + '\n\n'
             written_number.append(paper.number)
-        if paper_count == 1:
+        if paper_count == 0:
+            return
+        elif paper_count == 1:
             content = '1 paper has been uploaded.\n\n' + content
             title = 'MIL-arXiv (1 paper)'
         else:
