@@ -10,8 +10,8 @@ class LogoutHandler(webapp2.RequestHandler):
     def get(self):
         if users.get_current_user() is not None:
             self.redirect(users.create_logout_url(self.request.uri))
-        self.redirect('/')
+        #self.redirect('/')
 
 app = webapp2.WSGIApplication([
     ('/utils/logout', LogoutHandler),
-], debug=True)
+])

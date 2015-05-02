@@ -48,7 +48,9 @@ class MainHandler(BaseHandler):
             self.redirect(users.create_login_url(self.request.uri))
             return
         if not '@mi.t.u-tokyo.ac.jp' in user.email() and 'gdgdgutta1016@gmail.com' != user.email():
-            self.response.write('Permission Denied')
+            self.response.write('MIL members only.')
+            self.response.write('<br>')
+            self.response.write('<a href="' + users.create_logout_url(self.request.uri) + '">Logout</a>')
             return
         q = ndb.gql("SELECT * FROM Account WHERE uid = :1", user.user_id())
         account = q.get()
@@ -84,6 +86,6 @@ class MainHandler(BaseHandler):
 
 app = webapp2.WSGIApplication([
     ('/', MainHandler),
-], debug=True)
+])
 
-#account.areasは辞書型にしているけどtrueのやつをlistにして持たせるだけの方が実際は賢い
+#account.areasは辞書型にしているけどtrueのやつをlistにして持たせるだけの方が実は賢い気がする

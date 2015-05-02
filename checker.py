@@ -114,4 +114,6 @@ class EndPaper(ndb.Model):
     number = ndb.TextProperty()
     area = ndb.StringProperty()
 
-app = webapp2.WSGIApplication([('/crons/checker', CheckArXiv)])
+app = webapp2.WSGIApplication([
+    ('/crons/checker', CheckArXiv)
+], debug=True)

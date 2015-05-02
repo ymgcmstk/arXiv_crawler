@@ -60,4 +60,6 @@ class SendEmail(webapp2.RequestHandler):
                        subject=title,
                        body=content)
 
-app = webapp2.WSGIApplication([('/crons/sender', SendEmail)])
+app = webapp2.WSGIApplication([
+    ('/crons/sender', SendEmail)
+], debug=True)
