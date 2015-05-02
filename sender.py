@@ -44,10 +44,10 @@ class SendEmail(webapp2.RequestHandler):
             content += 'http://arxiv.org/pdf/' + paper.number + '\n\n'
             written_number.append(paper.number)
         if paper_count == 1:
-            content = '1 paper has been uploaded today.\n\n' + content
+            content = '1 paper has been uploaded.\n\n' + content
             title = 'MIL-arXiv (1 paper)'
         else:
-            content = '%d papers have been uploaded today.\n\n' % paper_count + content
+            content = '%d papers have been uploaded.\n\n' % paper_count + content
             title = 'MIL-arXiv (%d papers)' % paper_count
         self.gmail(title, content, account.email)
     def gmail(self, title, content, address):
