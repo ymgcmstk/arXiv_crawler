@@ -8,8 +8,9 @@ from google.appengine.api import users
 
 class LogoutHandler(webapp2.RequestHandler):
     def get(self):
-        self.redirect(users.create_logout_url(self.request.uri))
+        if users.get_current_user() is not None:
+            self.redirect(users.create_logout_url(self.request.uri))
 
 app = webapp2.WSGIApplication([
-    ('/logout/logout', LogoutHandler),
+    ('/api/logout', LogoutHandler),
 ], debug=True)
