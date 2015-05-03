@@ -5,4 +5,5 @@ cron:
 
 - description: E-mail sender
   url: /crons/sender
-  schedule: every day 3:00
+  schedule: every day 12:00
+  timezone: Asia/Tokyo
