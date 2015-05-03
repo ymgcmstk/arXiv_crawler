@@ -22,6 +22,7 @@ handlers:
 
 - url: /utils/logout
   script: logout.app
+  login: admin
 
 - url: /utils/disp
   script: disp.app
