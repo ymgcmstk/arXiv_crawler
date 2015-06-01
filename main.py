@@ -47,8 +47,8 @@ class MainHandler(BaseHandler):
         if user is None:
             self.redirect(users.create_login_url(self.request.uri))
             return
-        if not '@mi.t.u-tokyo.ac.jp' in user.email() and 'gdgdgutta1016@gmail.com' != user.email():
-            self.response.write('MIL members only.')
+        if not '@XXXXXXXXX' in user.email():
+            self.response.write('Access denied.')
             self.response.write('<br>')
             self.response.write('<a href="' + users.create_logout_url(self.request.uri) + '">Logout</a>')
             return

@@ -50,10 +50,10 @@ class SendEmail(webapp2.RequestHandler):
             return
         elif paper_count == 1:
             content = '1 paper has been uploaded.\n\n' + content
-            title = 'MIL-arXiv (1 paper)'
+            title = 'arXiv checker (1 paper)'
         else:
             content = '%d papers have been uploaded.\n\n' % paper_count + content
-            title = 'MIL-arXiv (%d papers)' % paper_count
+            title = 'arXiv checker (%d papers)' % paper_count
         self.gmail(title, content, account.email)
     def gmail(self, title, content, address):
         mail.send_mail(sender="papers@XXXXXXXXX.appspotmail.com",
