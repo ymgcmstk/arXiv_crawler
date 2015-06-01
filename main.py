@@ -87,5 +87,3 @@ class MainHandler(BaseHandler):
 app = webapp2.WSGIApplication([
     ('/', MainHandler),
 ])
-
-#account.areasは辞書型にしているけどtrueのやつをlistにして持たせるだけの方が実は賢い気がする

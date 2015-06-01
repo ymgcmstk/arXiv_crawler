@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 # coding: utf-8
 
 import webapp2
@@ -58,8 +59,6 @@ class CheckArXiv(webapp2.RequestHandler):
         paper.area = area
         paper.put()
     def parse_recent(self, url):
-        #htmlからpaperのnumberを抽出してそれらをリスト化する
-        #情報を抽出するだけならarXivの番号だけで十分な気もする
         num_list = []
         this_html = self.get_html(url)
         this_start = ['"Abstract">arXiv:']
@@ -77,7 +76,6 @@ class CheckArXiv(webapp2.RequestHandler):
         this_papers = {}
         total = len(num_list)
         count = 0
-        #num_listは逆時系列順になっているとしている
         for i in num_list:
             if i == end_paper:
                 break

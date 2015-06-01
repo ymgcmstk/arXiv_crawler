@@ -1,4 +1,4 @@
-application: mil-arxiv
+application: XXXXXXXXX
 version: 1
 runtime: python27
 api_version: 1
@@ -18,18 +18,6 @@ handlers:
 
 - url: /crons/sender
   script: sender.app
-  login: admin
-
-- url: /utils/logout
-  script: logout.app
-  login: admin
-
-- url: /utils/disp
-  script: disp.app
-  login: admin
-
-- url: /utils/modify_end
-  script: modify_end.app
   login: admin
 
 - url: .*
