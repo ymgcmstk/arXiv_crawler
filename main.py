@@ -4,6 +4,7 @@
 from db_classes import Account
 from google.appengine.api import users
 from google.appengine.api import memcache
+from google.appengine.ext import ndb
 import jinja2
 import logging
 import os
