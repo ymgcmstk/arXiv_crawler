@@ -1,10 +1,10 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-import webapp2
 from google.appengine.ext import ndb
+from settings import *
 import urllib2
-from main import TARGLIST
+import webapp2
 
 class CheckArXiv(webapp2.RequestHandler):
     def get(self):

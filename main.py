@@ -1,13 +1,15 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-import os
-import json
-import webapp2
-import jinja2
-import logging
+
 from google.appengine.ext import ndb
 from google.appengine.api import users
 from google.appengine.api import memcache
+import jinja2
+import json
+import logging
+import os
+from settings import *
+import webapp2
 
 _EXPIRES_IN = 1
 
@@ -15,8 +17,6 @@ JINJA_ENVIRONMENT = jinja2.Environment(
     loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
     extensions=['jinja2.ext.autoescape'],
     autoescape=True)
-
-TARGLIST = ['cs.CV', 'cs.CL', 'cs.NE', 'stat.ML']
 
 def make_targ(targlist):
     ret = {}
@@ -44,13 +44,7 @@ class BaseHandler(webapp2.RequestHandler):
 class MainHandler(BaseHandler):
     def get(self):
         user = users.get_current_user()
-        if user is None:
-            self.redirect(users.create_login_url(self.request.uri))
-            return
-        if not '@XXXXXXXXX' in user.email():
-            self.response.write('Access denied.')
-            self.response.write('<br>')
-            self.response.write('<a href="' + users.create_logout_url(self.request.uri) + '">Logout</a>')
+        if filter_user(user, self):
             return
         q = ndb.gql("SELECT * FROM Account WHERE uid = :1", user.user_id())
         account = q.get()

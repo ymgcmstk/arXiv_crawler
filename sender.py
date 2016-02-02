@@ -1,11 +1,12 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
 
-import webapp2
-from google.appengine.ext import ndb
-from main import TARGLIST, Account
 from checker import Paper
 from google.appengine.api import mail
+from google.appengine.ext import ndb
+from main import  Account
+from settings import *
+import webapp2
 
 class SendEmail(webapp2.RequestHandler):
     def get(self):
@@ -56,7 +57,7 @@ class SendEmail(webapp2.RequestHandler):
             title = 'arXiv checker (%d papers)' % paper_count
         self.gmail(title, content, account.email)
     def gmail(self, title, content, address):
-        mail.send_mail(sender="papers@XXXXXXXXX.appspotmail.com",
+        mail.send_mail(sender=SENDER_ADDRESS,
                        to=address,
                        subject=title,
                        body=content)
