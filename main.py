@@ -31,6 +31,7 @@ class BaseHandler(webapp2.RequestHandler):
         return template
 
 class MainHandler(BaseHandler):
+    SUCCESS_STR = 'success'
     def get(self):
         user = users.get_current_user()
         if filter_user(user, self):
@@ -50,9 +51,13 @@ class MainHandler(BaseHandler):
             flg = memcache.get(i)
             if flg is not None:
                 account.areas[i] = flg
+        success_or_not = False
+        if SUCCESS_STR in self.request.GET:
+            success_or_not = True
         self.render('index.html', {'account': account,
                                    'appname': APP_NAME,
-                                   'name': user.nickname().split('@')[0]})
+                                   'name': user.nickname().split('@')[0],
+                                   'success': success_or_not})
 
     def post(self):
         user = users.get_current_user()
@@ -66,7 +71,7 @@ class MainHandler(BaseHandler):
         account.put()
         for i, j in account.areas.items():
             memcache.add(i, j, _EXPIRES_IN)
-        self.redirect('/')
+        self.redirect('/?%d' % SUCCESS_STR)
 
 app = webapp2.WSGIApplication([
     ('/', MainHandler),
