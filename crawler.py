@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-from db_classes import EndPaper, Paper
+from db_classes import LastPaper, Paper
 from google.appengine.ext import ndb
 from settings import *
 import urllib2
@@ -85,15 +85,15 @@ class CrawlArXiv(webapp2.RequestHandler):
             count += 1
             self.parse_abs(i, area)
     def update_end_paper(self, area, number):
-        q = ndb.gql("SELECT * FROM EndPaper WHERE area = :1", area)
+        q = ndb.gql("SELECT * FROM LastPaper WHERE area = :1", area)
         end_paper = q.get()
         if end_paper is None:
-            end_paper = EndPaper()
+            end_paper = LastPaper()
             end_paper.area = area
         end_paper.number = number
         end_paper.put()
     def main(self, area):
-        end_paper = ndb.gql("SELECT * FROM EndPaper WHERE area = :1", area).get()
+        end_paper = ndb.gql("SELECT * FROM LastPaper WHERE area = :1", area).get()
         if end_paper is not None:
             end_paper_number = end_paper.number
         else:

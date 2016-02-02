@@ -24,6 +24,6 @@ class Paper(ndb.Model):
     area = ndb.StringProperty()
     updated_at = ndb.TextProperty()
 
-class EndPaper(ndb.Model):
+class LastPaper(ndb.Model):
     number = ndb.TextProperty()
     area = ndb.StringProperty()
