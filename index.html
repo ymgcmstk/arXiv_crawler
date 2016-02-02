@@ -8,11 +8,11 @@
   <body>
     <div id="container">
       <div id="content">
-        {% if success %}
-        <h1>Submission has been updated.</h1>
-        {% endif %}
         <h1>{{ appname }}</h1>
         <div class="hi-message">Hi, {{ name }}!</div>
+        {% if success %}
+        <div class="success">DB has been updated successfully.</div>
+        {% endif %}
         <h3>Subscriptions:</h3>
         <form method="post" action="/">
           {% for area, flg in account.areas.items()|sort  %}
