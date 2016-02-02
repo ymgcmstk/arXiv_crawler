@@ -1,11 +1,10 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from google.appengine.ext import ndb
+from db_classes import Account
 from google.appengine.api import users
 from google.appengine.api import memcache
 import jinja2
-import json
 import logging
 import os
 from settings import *
@@ -23,17 +22,6 @@ def make_targ(targlist):
     for i in targlist:
         ret[i] = False
     return ret
-
-class ExtendedJsonProperty(ndb.BlobProperty):
-    def _to_base_type(self, value):
-        return json.dumps(value)
-    def _from_base_type(self, value):
-        return json.loads(value)
-
-class Account(ndb.Model):
-    uid = ndb.StringProperty()
-    email = ndb.TextProperty()
-    areas = ExtendedJsonProperty()
 
 class BaseHandler(webapp2.RequestHandler):
     def render(self, html, values={}):
@@ -61,8 +49,9 @@ class MainHandler(BaseHandler):
             flg = memcache.get(i)
             if flg is not None:
                 account.areas[i] = flg
-        self.render('index.html', {'account':account,
-                                   'name':user.nickname().split('@')[0]})
+        self.render('index.html', {'account': account,
+                                   'appname': APP_NAME,
+                                   'name': user.nickname().split('@')[0]})
 
     def post(self):
         user = users.get_current_user()

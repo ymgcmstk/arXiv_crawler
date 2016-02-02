@@ -1,6 +1,6 @@
 cron:
-- description: Daily arXiv checker
-  url: /crons/checker
+- description: Daily arXiv crawler
+  url: /crons/crawler
   schedule: every 6 hours
 
 - description: E-mail sender

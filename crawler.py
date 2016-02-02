@@ -1,12 +1,13 @@
 #!/usr/bin/env python
 # coding: utf-8
 
+from db_classes import EndPaper, Paper
 from google.appengine.ext import ndb
 from settings import *
 import urllib2
 import webapp2
 
-class CheckArXiv(webapp2.RequestHandler):
+class CrawlArXiv(webapp2.RequestHandler):
     def get(self):
         for area in TARGLIST:
             self.main(area)
@@ -99,19 +100,6 @@ class CheckArXiv(webapp2.RequestHandler):
             end_paper_number = None
         self.get_info(area, end_paper_number)
 
-class Paper(ndb.Model):
-    number = ndb.StringProperty()
-    title = ndb.TextProperty()
-    first_author = ndb.TextProperty()
-    authors = ndb.TextProperty()
-    abstract = ndb.TextProperty()
-    area = ndb.StringProperty()
-    updated_at = ndb.TextProperty()
-
-class EndPaper(ndb.Model):
-    number = ndb.TextProperty()
-    area = ndb.StringProperty()
-
 app = webapp2.WSGIApplication([
-    ('/crons/checker', CheckArXiv)
+    ('/crons/crawler', CrawlArXiv)
 ], debug=True)

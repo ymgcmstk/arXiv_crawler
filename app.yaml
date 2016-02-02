@@ -12,8 +12,8 @@ handlers:
 - url: /css
   static_dir: css
 
-- url: /crons/checker
-  script: checker.app
+- url: /crons/crawler
+  script: crawler.app
   login: admin
 
 - url: /crons/sender

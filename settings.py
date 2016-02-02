@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+APP_NAME = 'arXiv crawler'
 TARGLIST = ['cs.CV', 'cs.CL', 'cs.NE', 'stat.ML']
 SENDER_ADDRESS = 'papers@XXXXXXXXX.appspotmail.com'
 

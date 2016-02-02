@@ -1,10 +1,9 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
 
-from checker import Paper
+from db_classes import Account, Paper
 from google.appengine.api import mail
 from google.appengine.ext import ndb
-from main import  Account
 from settings import *
 import webapp2
 
@@ -51,10 +50,10 @@ class SendEmail(webapp2.RequestHandler):
             return
         elif paper_count == 1:
             content = '1 paper has been uploaded.\n\n' + content
-            title = 'arXiv checker (1 paper)'
+            title = '%s (1 paper)' % APP_NAME
         else:
             content = '%d papers have been uploaded.\n\n' % paper_count + content
-            title = 'arXiv checker (%d papers)' % paper_count
+            title = '%s (%d papers)' % (APP_NAME, paper_count)
         self.gmail(title, content, account.email)
     def gmail(self, title, content, address):
         mail.send_mail(sender=SENDER_ADDRESS,
