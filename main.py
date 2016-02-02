@@ -25,10 +25,10 @@ def make_targ(targlist):
     return ret
 
 class ExtendedJsonProperty(ndb.BlobProperty):
-  def _to_base_type(self, value):
-    return json.dumps(value)
-  def _from_base_type(self, value):
-    return json.loads(value)
+    def _to_base_type(self, value):
+        return json.dumps(value)
+    def _from_base_type(self, value):
+        return json.loads(value)
 
 class Account(ndb.Model):
     uid = ndb.StringProperty()
