@@ -67,7 +67,7 @@ class CrawlArXiv(webapp2.RequestHandler):
         while True:
             safety_count += 1
             this_num = self.getstr_fromto(this_html, this_start, ["</a>"])
-            if this_num == "" or safety_count > 50:
+            if this_num == "" or safety_count > PAPER_LIMIT:
                 break
             num_list.append(this_num)
             this_start = ['arXiv:' + this_num, '"Abstract">arXiv:']
