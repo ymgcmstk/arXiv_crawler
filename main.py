@@ -52,7 +52,7 @@ class MainHandler(BaseHandler):
             if flg is not None:
                 account.areas[i] = flg
         success_or_not = False
-        if SUCCESS_STR in self.request.GET:
+        if self.SUCCESS_STR in self.request.GET:
             success_or_not = True
         self.render('index.html', {'account': account,
                                    'appname': APP_NAME,
@@ -71,7 +71,7 @@ class MainHandler(BaseHandler):
         account.put()
         for i, j in account.areas.items():
             memcache.add(i, j, _EXPIRES_IN)
-        self.redirect('/?%d' % SUCCESS_STR)
+        self.redirect('/?%s' % self.SUCCESS_STR)
 
 app = webapp2.WSGIApplication([
     ('/', MainHandler),
