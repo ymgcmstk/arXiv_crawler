@@ -4,6 +4,7 @@
 from db_classes import LastPaper, Paper
 from google.appengine.ext import ndb
 from settings import *
+import time
 import urllib2
 import webapp2
 
@@ -15,6 +16,7 @@ class CrawlArXiv(webapp2.RequestHandler):
     def gen_recent_url(self, area):
         return "http://arxiv.org/list/" + area + "/recent"
     def get_html(self, url):
+        time.sleep(INTERVAL)
         fp = urllib2.urlopen(url)
         html = fp.read()
         fp.close()

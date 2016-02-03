@@ -4,6 +4,7 @@
 from google.appengine.api import users
 
 APP_NAME       = 'arXiv crawler'
+INTERVAL       = 5
 PAPER_LIMIT    = 20
 SENDER_ADDRESS = 'papers@XXXXXXXXX.appspotmail.com'
 TARGLIST       = ['cs.CV', 'cs.CL', 'cs.NE', 'stat.ML']

@@ -9,6 +9,8 @@ First, you have to rewrite the following files.
 
 `APP_NAME`: The name of this app. You don't have to rewrite if not needed.
 
+`INERVAL`: The interval between accesses.
+
 `PAPER_LIMIT`: The maximum number of crawling times.
 
 `SENDER_ADDRESS`: The email address that sends emails.
